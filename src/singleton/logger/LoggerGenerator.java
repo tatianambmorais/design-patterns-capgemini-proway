@@ -21,15 +21,28 @@ public class LoggerGenerator {
         return instance;
     }
 
-    public void addLogs(String log) {
+    public void addLogs(String log, String level) {
         logs.add(log);
-        logger.log(Level.INFO, "Log added: {0}", log);
+        Level logLevel;
+        switch(level){
+            case "info":
+                logLevel = Level.INFO;
+                break;
+            case "warning":
+                logLevel = Level.WARNING;
+                break;
+            case "error":
+                logLevel = Level.SEVERE;
+                break;
+
+            default:
+                logLevel = Level.INFO; // ou você pode lançar uma exceção ou usar um nível padrão
+                logger.warning("Nível de log desconhecido: " + level + ". Usando INFO como padrão");
+
+        }
+        logger.log(logLevel, "Log added: {0}", log);
+
     }
 
-    public void printLogs() {
-        logger.info("-- PRINTING LOGS --");
-        for (String log : logs) {
-            logger.info(log);
-        }
-    }
+
 }
