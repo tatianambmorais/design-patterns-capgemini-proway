@@ -1,4 +1,4 @@
-package composite;
+package composite.sistemaDeArquivos;
 
 public class Arquivo implements ItemSistema {
     private String name;
